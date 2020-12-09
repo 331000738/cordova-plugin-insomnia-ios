@@ -22,6 +22,7 @@
 #import "APPMethodMagic.h"
 #import "Insomnia.h"
 #import <Cordova/CDVAvailability.h>
+#import <Cordova/CDV.h>
 #import "LSApplicationWorkspace.h"
 #include "notify.h"
 
@@ -111,6 +112,34 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
  * Enable the mode to stay awake
  * when switching to background for the next time.
  */
+
+ - (void) acquireWakeLock:(CDVInvokedUrlCommand*)command {
+   NSString *callbackId = command.callbackId;
+
+   // Acquire a reference to the local UIApplication singleton
+   UIApplication* app = [UIApplication sharedApplication];
+
+   if (![app isIdleTimerDisabled]) {
+     [app setIdleTimerDisabled:true];
+   }
+   CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+   [self.commandDelegate sendPluginResult:result callbackId:callbackId];
+ }
+
+ - (void) releaseWakeLock:(CDVInvokedUrlCommand*)command {
+   NSString *callbackId = command.callbackId;
+
+   // Acquire a reference to the local UIApplication singleton
+   UIApplication* app = [UIApplication sharedApplication];
+
+   if([app isIdleTimerDisabled]) {
+     [app setIdleTimerDisabled:false];
+   }
+   CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+   [self.commandDelegate sendPluginResult:result callbackId:callbackId];
+ }
+ 
+ 
 - (void) enable:(CDVInvokedUrlCommand*)command
 {
     if (enabled)

@@ -29,6 +29,8 @@
     BOOL foregroundAfterUnlock;
 }
 
+- (void) acquireWakeLock:(CDVInvokedUrlCommand*)command;
+- (void) releaseWakeLock:(CDVInvokedUrlCommand*)command;
 // Activate the background mode
 - (void) enable:(CDVInvokedUrlCommand*)command;
 // Deactivate the background mode
