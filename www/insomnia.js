@@ -1,7 +1,7 @@
 
 var exec    = require('cordova/exec'),
     channel = require('cordova/channel'),
-    _isIos = false,
+    _isIos = false;
 
 module.exports = {
 
@@ -20,20 +20,18 @@ module.exports = {
         	errorCallback("iOS Only");
         }
     },
-    // IOS
-
-    // BOTH
     switchOnScreenAndForeground: function (successCallback, errorCallback, options) {
-        cordova.exec(successCallback, errorCallback, 'Insomnia', 'switchOnScreenAndForeground', [options]);        
+        if(_isIos) {
+            cordova.exec(successCallback, errorCallback, 'Insomnia', 'switchOnScreenAndForeground', [options]);        
+        } else {
+            errorCallback("iOS Only");
+        }
     }
-    // BOTH    
-
 }
 
 // Called before 'deviceready' listener will be called
 channel.onCordovaReady.subscribe(function() {
     channel.onCordovaInfoReady.subscribe(function() {
-        _isAndroid = device.platform.match(/^android/i) !== null;
         _isIos = device.platform.match(/^iOS/i) !== null;
     });
 });
