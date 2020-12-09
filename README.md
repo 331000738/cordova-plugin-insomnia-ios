@@ -5,7 +5,6 @@
 * 因android安装不上，且意义不大，移除安卓部分。
 
 * 在ios上可点亮屏幕。
-
     * 另一个插件(基本版)在ios和android下均可长亮，无具体点亮功能。
     * 基本版： cordova-plugin-insomnia
     * https://github.com/EddyVerbruggen/Insomnia-PhoneGap-Plugin#3-usage
