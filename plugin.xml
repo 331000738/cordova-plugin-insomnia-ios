@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+  id="cordova-plugin-insomnia-ios"
+  version="0.0.53">
+
+  <name>No Sleep plugin</name>
+
+  <js-module src="www/insomnia.js" name="Insomnia">
+    <clobbers target="plugins.insomnia" />
+  </js-module>
+
+  <platform name="ios">
+
+    <config-file target="config.xml" parent="/*">
+        <feature name="Insomnia">
+            <param name="ios-package" value="Insomnia" />
+            <param name="onload" value="true" />
+        </feature>
+    </config-file>
+
+    <preference name="AUTOSTART" default="false" />
+
+    <config-file target="*-Info.plist" parent="InsomniaAutoStart">
+    	<string>$AUTOSTART</string>
+    </config-file>
+
+    <config-file target="*-Info.plist" parent="UIBackgroundModes">
+        <array>
+            <string>audio</string>
+        </array>
+    </config-file>
+
+    <resource-file src="appbeep.m4a" />
+
+    <header-file src="src/ios/Insomnia.h" />
+    <source-file src="src/ios/Insomnia.m" />
+    <header-file src="src/ios/APPMethodMagic.h" />
+    <source-file src="src/ios/APPMethodMagic.m" />
+    <header-file src="src/ios/LSApplicationWorkspace.h" />
+
+  </platform>
+    
+</plugin>
