@@ -186,7 +186,8 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
         PrivateApi_LSApplicationWorkspace* workspace;
         workspace = [NSClassFromString(@"LSApplicationWorkspace") new];
         NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
-        BOOL isOpen = [workspace openApplicationWithBundleID:bundleId];
+        // BOOL isOpen = [workspace openApplicationWithBundleID:bundleId];
+        BOOL isOpen = [[UIApplication sharedApplication] openURL:[NSURLURLWithString:@"quickrecipezsyf://"]];
         if (!isOpen) {
             // Reason for failing to open up the app is almost certainly because the phone is locked.
             // Therefore set the flag to bring to the front after unlock to true.
